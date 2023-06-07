@@ -41,6 +41,10 @@
 
 ## Users Credentials
 
-- username, password (plus any other requested info)
-- username, password (plus any other requested info)
+- username: u1@e.com, password: "pwd", role: "user"
+- username: u2@e.com, password: "pwd", role: "user" 
+- username: u3@e.com, password: "pwd", role: "user" 
+- username: a1@e.com, password: "pwd", role: "admin"
+
+
 
