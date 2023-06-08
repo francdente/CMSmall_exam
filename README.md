@@ -10,6 +10,84 @@
 
 ## API Server
 
+### __Get pages__
+
+URL: `/api/pages`
+
+Method: GET
+
+Description: Get all pages
+
+Request body: _None_
+
+Response: `200 OK` (success) or `500 Internal Server Error` (error)
+
+Response body: An array of objects, each describing a page
+```
+[
+  {
+    "page_id": 1,
+    "author_id": 1,
+    "author_name": "John Doe",
+    "title": "Page title",
+    "creation_date": "2020-01-01T00:00:00.000Z",
+    "publication_date": "2020-01-01T00:00:00.000Z",
+  },
+  ....
+]
+```
+
+### __Get published pages__
+
+URL: `/api/pages/published`
+
+Method: GET
+
+Description: Get all published pages
+
+Request body: _None_
+
+Response: `200 OK` (success) or `500 Internal Server Error` (error)
+
+Response body: An array of objects, each describing a page
+```
+[
+  {
+    "page_id": 1,
+    "author_id": 1,
+    "author_name": "John Doe",
+    "title": "Page title",
+    "creation_date": "2020-01-01T00:00:00.000Z",
+    "publication_date": "2020-01-01T00:00:00.000Z",
+  },
+  ....
+]
+```
+
+### __Get page (by Id)__
+
+URL: `/api/pages/:id`
+
+Method: GET
+
+Description: Get page with given id
+
+Request body: _None_
+
+Response: `200 OK` (success) or `500 Internal Server Error` (error)
+
+Response body: An object describing the page
+```
+{
+  "page_id": 1,
+  "author_id": 1,
+  "author_name": "John Doe",
+  "title": "Page title",
+  "creation_date": "2020-01-01T00:00:00.000Z",
+  "publication_date": "2020-01-01T00:00:00.000Z",
+}
+```
+
 - POST `/api/login`
   - request parameters and request body content
   - response body content
