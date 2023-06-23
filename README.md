@@ -327,36 +327,26 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 
 ## Main React Components
 
-`App`: component that manages the routing of the application. It contains the main states for the application.
+- `App`: component that manages the routing of the application. It contains the main states for the application.
 
-`PagesRoute` (in `PagesRoute.jsx`): component in route "/", it wraps the `MainPages` component and is responsible for:
-- rendering the NavHeader
-- rendering the button for changing from backOffice to frontOffice and for creating a new page
-- rendering the form for changing sitename (and the `Alert` component for validation errors)
-- rendering `Alert` component for showing generic errors that should not happen if the application is working properly
-- `GreatButton` (in `GreatButton.js`): component purpose and main functionality
+- `PagesRoute` (in `PagesRoute.jsx`): component in route "/", it wraps the `MainPages` component and is responsible for rendering the NavHeader, the button for changing from backOffice to frontOffice and for creating a new page, the form for changing sitename. It is also responsible for rendering `Alert` component for showing generic errors that should not happen if the application is working properly.
 
-`MainPages` (in `PageComponents.jsx`): component that only renders the list of pages using the `PageRow` component
+- `MainPages` (in `PageComponents.jsx`): component that only renders the list of pages using the `PageRow` component
 
-`PageRow` (in `PageComponents.jsx`): component that renders a single row of the list of pages. Its main feature is rendering correct action buttons based on current session.
+- `PageRow` (in `PageComponents.jsx`): component that renders a single row of the list of pages. Its main feature is rendering correct action buttons based on current session.
 
-`PageEdit` (in `PageComponents.jsx`): component that renders the form for editing/adding a page. It manages all the logic related to changing the layout of a page (adding/removing blocks, changing their position, content, or type, changing page properties). It's all made locally on the client, information is sent to the server only when clicking `save` button. It renders a list of `BlockForm` components, that are responsible for rendering the single editable block 
+- `PageEdit` (in `PageComponents.jsx`): component that renders the form for editing/adding a page. It manages all the logic related to changing the layout of a page (adding/removing blocks, changing their position, content, or type, changing page properties). It's all made locally on the client, information is sent to the server only when clicking `save` button. It renders a list of `BlockForm` components, that are responsible for rendering the single editable block 
 
-`PageView` (in `PageComponents.jsx`): component that renders a page only in view mode. It renders a list of `BlockView` components, that are responsible for rendering the single block.
+- `PageView` (in `PageComponents.jsx`): component that renders a page only in view mode. It renders a list of `BlockView` components, that are responsible for rendering the single block.
 
-`NavHeader` (in `NavbarComponents.jsx): component that renders the navbar, present in every page of the application, it renders different buttons based on current session or route.
+- `NavHeader` (in `NavbarComponents.jsx): component that renders the navbar, present in every page of the application, it renders different buttons based on current session or route.
 
-`LoginForm` (in `AuthComponents.jsx`): component that renders the form for login
-
-
-
-
-(only _main_ components, minor ones may be skipped)
+- `LoginForm` (in `AuthComponents.jsx`): component that renders the form for login
 
 ## Screenshot
 
-![Screenshot](./AllPages.png)
-![Screenshot](./NewPage.png)
+![Screenshot](./AllPages.PNG)
+![Screenshot](./NewPage.PNG)
 
 ## Users Credentials
 
