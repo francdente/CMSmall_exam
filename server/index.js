@@ -57,7 +57,7 @@ const corsOptions = {
 app.use(cors(corsOptions)); // NB: Usare solo per sviluppo e per l'esame! Altrimenti indicare dominio e porta corretti
 app.use('/static', express.static('public')); // serve static files
 
-const answerDelay = 500; // 1 second
+const answerDelay = 0; // 1 second
 
 // custom middleware: check if a given request is coming from an authenticated user
 const isLoggedIn = (req, res, next) => {
@@ -230,7 +230,11 @@ app.put('/api/pages/:page_id', isLoggedIn, [
       if (!user){
         return res.status(422).json({ errors: [{ msg: "The author_id is not a valid user" }] });
       }
-    } 
+    }
+    //check if new publication date is after the creation date
+    if (newPage.publication_date && dayjs(page.creation_date).isAfter(newPage.publication_date, 'day')) {
+      return res.status(422).json({ errors: [{ msg: "The publication date cannot be before the creation date" }] });
+    }
     //delete all the blocks of the page and update the page
     await Promise.all([dao.deleteBlocksByPage(req.params.page_id),
     dao.updatePage(req.params.page_id, newPage.title, newPage.publication_date, newPage.author_id)
@@ -275,6 +279,10 @@ app.post('/api/pages', isLoggedIn, [
       if (!user){
         return res.status(422).json({ errors: [{ msg: "The author_id is not a valid user" }] });
       }
+    }
+    //check if publication date is after the creation date(so now)
+    if (req.body.publication_date && dayjs().isAfter(req.body.publication_date, 'day')) {
+      return res.status(422).json({ errors: [{ msg: "The publication date cannot be before the creation date" }] });
     }
 
     //I use req.body.author_id (so that this can work both for admin and user), already checked in the if above. If he's a user, I'm sure it's his id.

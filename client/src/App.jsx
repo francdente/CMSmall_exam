@@ -78,7 +78,7 @@ function App() {
           })
       }
       else {
-        //Fetch only published pages if not logged in or in logged in and in frontOffice
+        //Fetch only published pages if not logged in or logged in and in frontOffice
         Promise.all([API.getPublishedPages(), API.getSiteName()])
           .then( ([pages, siteName]) => {
             setPages(pages);
@@ -97,7 +97,8 @@ function App() {
 
   const doLogout = async () => {
     //Destroy session on server, so I need to reset all the states based on login
-    try{setAuthLoading(true);
+    try{
+    setAuthLoading(true);
     setLoading(true);
     await API.logOut();
     setAuthLoading(false);
@@ -127,7 +128,7 @@ function App() {
     setChangingSiteName(true); //the useEffect depending on dirty will set it to false. There's no need to put in loading also pages (they will be fetched, but they are not affected by the change of the sitename)
     API.updateSiteName(siteName)
       .then(() => {
-        setDirty(true);
+        setDirty(true); //To trigger fetch of up-to-date information (pages and siteName)
       })
       .catch((err) => handleError(err)
       );
