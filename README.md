@@ -355,7 +355,8 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 
 ## Screenshot
 
-![Screenshot](./img/screenshot.jpg)
+![Screenshot](./AllPages.png)
+![Screenshot](./NewPage.png)
 
 ## Users Credentials
 
