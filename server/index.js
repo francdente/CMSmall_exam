@@ -157,19 +157,27 @@ app.get('/api/sitename', async (req, res) => {
   }
 });
 
-// middleware to check if at least one header and one other block are present in PUT and POST requests
+// middleware to check if at least one header and one other block are present and if position are consistent numbers in PUT and POST requests
 const checkBlocks = (req, res, next) => {
   const blocks = req.body.blocks;
   let header = false;
   let other = false;
-  blocks.forEach(b => { if (b.block_type === "header") header = true; else other = true; });
+  let position = false;
+  console.log(blocks);
+  blocks.forEach(b => { if (b.block_type === "header") header = true; else other = true; if (b.position >= blocks.length) position = true; });
+  const tmpSet = new Set(blocks.map(b => b.position));
+  //Check if at least one header and one other block are present
   if (!header) {
     return res.status(422).json({ errors: [{ msg: "You need at least one header in your page" }] });
   }
   else if (!other) {
     return res.status(422).json({ errors: [{ msg: "You need at least one block that is not a header in your page" }] });
   }
-  return next();
+  //Check if position is lower than the number of blocks, and if all the positions are different
+  if (position || tmpSet.size !== blocks.length) {
+    return res.status(422).json({ errors: [{ msg: "The position of at least one block is not valid" }] });
+  }
+  return next(); 
 }
 
 // PUT /api/sitename
@@ -201,13 +209,13 @@ app.put('/api/sitename', isLoggedIn, [
 /* Authenticated route, different behaviours based on admin or user*/
 app.put('/api/pages/:page_id', isLoggedIn, [
   check("page_id").isInt(),
-  check("author_id").isInt(),
+  check("author_id").isInt( {min: 0} ),
   check("title").isString().notEmpty(),
   check("publication_date").optional().isDate({ format: 'YYYY-MM-DD', strictMode: true }),
   check("blocks").isArray(),
   check("blocks.*.block_type").isIn(["paragraph", "header", "image"]),
   check("blocks.*.content").isString().notEmpty(),
-  check("blocks.*.position").isInt().isLength({ min: 0 }), 
+  check("blocks.*.position").isInt({ min: 0 }), 
 ], checkBlocks, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -216,6 +224,10 @@ app.put('/api/pages/:page_id', isLoggedIn, [
   const newPage = req.body;
   try {
     const page = await dao.getPage(req.params.page_id);
+    //Page to update not found
+    if (page.error) {
+      return res.status(404).json(page);
+    }
     //check on user can change only his pages, unless he is admin
     if (req.user.id != page.author_id && !req.user.admin) {
       return res.status(401).json({ error: "You can't edit this page" });
@@ -227,7 +239,7 @@ app.put('/api/pages/:page_id', isLoggedIn, [
     //check if author_id is a valid user
     if (req.user.admin) {
       const user = await userDao.getUserById(req.body.author_id);
-      if (!user){
+      if (user.error){
         return res.status(422).json({ errors: [{ msg: "The author_id is not a valid user" }] });
       }
     }
@@ -235,6 +247,7 @@ app.put('/api/pages/:page_id', isLoggedIn, [
     if (newPage.publication_date && dayjs(page.creation_date).isAfter(newPage.publication_date, 'day')) {
       return res.status(422).json({ errors: [{ msg: "The publication date cannot be before the creation date" }] });
     }
+
     //delete all the blocks of the page and update the page
     await Promise.all([dao.deleteBlocksByPage(req.params.page_id),
     dao.updatePage(req.params.page_id, newPage.title, newPage.publication_date, newPage.author_id)
@@ -258,11 +271,11 @@ app.put('/api/pages/:page_id', isLoggedIn, [
 app.post('/api/pages', isLoggedIn, [
   check("title").isString().notEmpty(),
   check("publication_date").optional().isDate({ format: 'YYYY-MM-DD', strictMode: true }),
-  check("author_id").isInt(),
+  check("author_id").isInt( { min: 0 } ),
   check("blocks").isArray(),
   check("blocks.*.block_type").isIn(["paragraph", "header", "image"]),
   check("blocks.*.content").isString().notEmpty(),
-  check("blocks.*.position").isInt().isLength({ min: 0 }),
+  check("blocks.*.position").isInt( { min: 0 } ),
 ], checkBlocks, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -276,7 +289,7 @@ app.post('/api/pages', isLoggedIn, [
     //check if author_id is a valid user
     if (req.user.admin) {
       const user = await userDao.getUserById(req.body.author_id);
-      if (!user){
+      if (user.error){
         return res.status(422).json({ errors: [{ msg: "The author_id is not a valid user" }] });
       }
     }

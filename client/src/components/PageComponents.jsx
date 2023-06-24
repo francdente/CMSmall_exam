@@ -62,7 +62,7 @@ function PageView(props) {
     } else if (err.error) {
       errMsg = err.error;
     }
-    setErrorMessage(errMsg);
+    setErrorMessage(errMsg+"(Unrecoverable error)");
   }
   /* Load page from database at mount */
   useEffect(() => {
@@ -111,7 +111,7 @@ function PageView(props) {
   )
 }
 
-function BlockForm(props) {
+function BlockEdit(props) {
   const position = props.position;
   const block = props.blocks.find(b => b.position === position);
   const images = props.images;
@@ -168,7 +168,6 @@ function BlockForm(props) {
   )
 }
 
-
 function PageEdit(props) {
   //Form for adding/editing a newpage. The decision is based on the props passed (addPage or editPage)
   const [currentPage, setCurrentPage] = useState(undefined);
@@ -192,7 +191,7 @@ function PageEdit(props) {
     } else if (err.error) {
       errMsg = err.error;
     }
-    setErrorMessage(errMsg);
+    setErrorMessage(errMsg+"(Unrecoverable error)");
   }
 
   /* Position is used as unique identifier, since it's always unique at page scope*/
@@ -424,7 +423,7 @@ function PageEdit(props) {
                 <Form.Label>Title</Form.Label>
               <Form.Control type="text" name="title" value={currentPage.title} onChange={ev => handleTitleChange(ev.target.value)} />
               </Form.Group>
-              {blocks.sort((a, b) => a.position - b.position).map((e) => <BlockForm key={e.position} images={images} position={e.position} blocks={blocks} handleContentChange={handleContentChange} handleBlockTypeChange={handleBlockTypeChange} deleteBlock={deleteBlock} moveUp={moveUp} moveDown={moveDown} />)}
+              {blocks.sort((a, b) => a.position - b.position).map((e) => <BlockEdit key={e.position} images={images} position={e.position} blocks={blocks} handleContentChange={handleContentChange} handleBlockTypeChange={handleBlockTypeChange} deleteBlock={deleteBlock} moveUp={moveUp} moveDown={moveDown} />)}
               </Container>
               <Form.Group className='mb-3'>
                 <Button variant="success" onClick={addBlock}>Add new block</Button>

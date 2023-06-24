@@ -38,9 +38,7 @@ function LoginForm(props) {
       event.preventDefault();
       setErrorMessage('');
       const credentials = { username, password };
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // SOME VALIDATION, ADD MORE if needed (e.g., check if it is an email if an email is required, etc.)
       if(username.trim() === '' || password.trim() === ''){
           setErrorMessage('Username and password cannot be empty');
           return;

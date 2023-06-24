@@ -90,7 +90,7 @@ Response body: An object describing the page
   "title": "Page title",
   "creation_date": "2020-01-01T00:00:00.000Z",
   "publication_date": "2020-01-01T00:00:00.000Z",
-  "blocks": //TODO: complete it
+  "blocks": [{block_id: 1, block_type: "header", content:"content", position: 1}, {...}, ...],
 }
 ```
 
@@ -204,7 +204,7 @@ Request body: An object representing the page (Content-Type: `application/json`)
 }
 ```
 
-Response: `200 OK` (success) or `503 Service Unavailable` (generic error). If the request body is not valid, `422 Unprocessable Entity` (validation error). If the request does not come on an authenticated session, `401 Unauthorized`.
+Response: `200 OK` (success) or `503 Service Unavailable` (generic error). If the request body is not valid, `422 Unprocessable Entity` (validation error).`404 Not found` If the page to update is not found. If the request does not come on an authenticated session, `401 Unauthorized`.
 
 Response body: _None_
 
@@ -335,7 +335,7 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 
 - `PageRow` (in `PageComponents.jsx`): component that renders a single row of the list of pages. Its main feature is rendering correct action buttons based on current session.
 
-- `PageEdit` (in `PageComponents.jsx`): component that renders the form for editing/adding a page. It manages all the logic related to changing the layout of a page (adding/removing blocks, changing their position, content, or type, changing page properties). It's all made locally on the client, information is sent to the server only when clicking `save` button. It renders a list of `BlockForm` components, that are responsible for rendering the single editable block 
+- `PageEdit` (in `PageComponents.jsx`): component that renders the form for editing/adding a page. It manages all the logic related to changing the layout of a page (adding/removing blocks, changing their position, content, or type, changing page properties). It's all made locally on the client, information is sent to the server only when clicking `save` button. It renders a list of `BlockEdit` components, that are responsible for rendering the single editable block 
 
 - `PageView` (in `PageComponents.jsx`): component that renders a page only in view mode. It renders a list of `BlockView` components, that are responsible for rendering the single block.
 

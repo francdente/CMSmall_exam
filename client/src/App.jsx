@@ -41,7 +41,7 @@ function App() {
       errMsg = err.error;
     }
 
-    setErrorMessage(errMsg);
+    setErrorMessage(errMsg+"(Unrecoverable error, please reload the page)");
   }
 
   /* Check if authenticated session is still active in the browser when reloading the app */
