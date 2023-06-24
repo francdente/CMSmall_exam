@@ -488,6 +488,7 @@ function PageRow(props) {
 
 function MainPages(props) {
   const session = useContext(UserContext);
+  //Pages are sorted in publication date order on the server, before sending them to the client
   return (
     <Container fluid>
       <Row>
