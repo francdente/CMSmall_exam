@@ -98,8 +98,8 @@ app.get('/api/pages', isLoggedIn, async (req, res) => {
 /* Non-Authenticated route */
 app.get('/api/pages/published', async (req, res) => {
   try {
-    const pages = await dao.getPublishedPages();
-    setTimeout(() => res.json(pages), answerDelay);
+    const pages = await dao.getPages();
+    setTimeout(() => res.json(pages.filter(p=>(!dayjs(p.publication_date).isAfter(dayjs(), 'day') && dayjs(p.publication_date).isValid()))), answerDelay);
   } catch (err) {
     console.log(err);
     res.status(500).end();
@@ -163,7 +163,6 @@ const checkBlocks = (req, res, next) => {
   let header = false;
   let other = false;
   let position = false;
-  console.log(blocks);
   blocks.forEach(b => { if (b.block_type === "header") header = true; else other = true; if (b.position >= blocks.length) position = true; });
   const tmpSet = new Set(blocks.map(b => b.position));
   //Check if at least one header and one other block are present

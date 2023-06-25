@@ -331,9 +331,9 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 
 - `PagesRoute` (in `PagesRoute.jsx`): component in route "/", it wraps the `MainPages` component and is responsible for rendering the NavHeader, the button for changing from backOffice to frontOffice and for creating a new page, the form for changing sitename. It is also responsible for rendering `Alert` component for showing generic errors that should not happen if the application is working properly.
 
-- `MainPages` (in `PageComponents.jsx`): component that only renders the list of pages using the `PageRow` component
+- `MainPages` (in `PagesRoute.jsx`): component that only renders the list of pages using the `PageRow` component
 
-- `PageRow` (in `PageComponents.jsx`): component that renders a single row of the list of pages. Its main feature is rendering correct action buttons based on current session.
+- `PageRow` (in `PagesRoute.jsx`): component that renders a single row of the list of pages. Its main feature is rendering correct action buttons based on current session.
 
 - `PageEdit` (in `PageComponents.jsx`): component that renders the form for editing/adding a page. It manages all the logic related to changing the layout of a page (adding/removing blocks, changing their position, content, or type, changing page properties). It's all made locally on the client, information is sent to the server only when clicking `save` button. It renders a list of `BlockEdit` components, that are responsible for rendering the single editable block 
 

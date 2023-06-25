@@ -36,6 +36,7 @@ exports.getPages = () => {
  * 
  * `page_id`, `author_id`, `author_name`, `title`, `creation_date`, `publication_date`
  */
+//Not used
 exports.getPublishedPages = () => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM pages, users WHERE publication_date <= date('now') AND pages.author_id = users.id";
@@ -57,6 +58,7 @@ exports.getPublishedPages = () => {
  * 
  * `page_id`, `author_id`, `author_name`, `title`, `creation_date`, `publication_date`
  */
+//Not used
 exports.getPublishedPagesByAuthor = (author_id) => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM pages, users WHERE publication_date <= date('now') AND pages.author_id = users.id AND author_id = ?";

@@ -80,10 +80,10 @@ function PageView(props) {
   if (currentPage && !currentPage.publication_date.isValid()) {
     status = 'draft';
   }
-  else if (currentPage && currentPage.publication_date.isAfter(dayjs())) {
+  else if (currentPage && currentPage.publication_date.isAfter(dayjs(), 'day')) {
     status = 'programmed';
   }
-  else if (currentPage && (currentPage.publication_date.isBefore(dayjs()) || currentPage.publication_date.isSame(dayjs()))) {
+  else if (currentPage && (currentPage.publication_date.isBefore(dayjs(), 'day') || currentPage.publication_date.isSame(dayjs(), 'day'))) {
     status = 'published';
   }
 
@@ -208,7 +208,8 @@ function PageEdit(props) {
       setErrorMessage("You can't submit a page with empty title");
       flag = true;
     }
-    if (currentPage.publication_date.isBefore(currentPage.creation_date)) {
+
+    if (currentPage.publication_date.isBefore(currentPage.creation_date, 'day')) {
       setErrorMessage("You can't submit a page with a publication date before the creation date");
       flag = true;
     }
@@ -445,72 +446,4 @@ function PageEdit(props) {
   )
 }
 
-function PageRow(props) {
-  const navigate = useNavigate();
-  const session = useContext(UserContext);
-
-  const e = props.e;
-  let statusClass = null;
-  let loading = null;
-
-  if (session.backOffice) {
-    if (e.status === 'deleted') {
-      statusClass = 'table-danger';
-    }
-    else if (!e.publication_date.isValid()) {
-      e.status = 'draft';
-      statusClass = 'table-secondary';
-    }
-    else if (e.publication_date.isAfter(dayjs())) {
-      e.status = 'programmed';
-      statusClass = 'table-primary';
-    }
-    else if (e.publication_date.isBefore(dayjs()) || e.publication_date.isSame(dayjs())) {
-      e.status = 'published';
-      statusClass = 'table-success';
-    }
-  }
-  return (
-    <tr className={statusClass}>
-      <td>{e.title}</td>
-      <td>{e.author_name}</td>
-      <td>{e.creation_date.format("YYYY-MM-DD")}</td>
-      <td>{e.publication_date.isValid() ? e.publication_date.format("YYYY-MM-DD") : "Not defined"}</td>
-      <td>
-        <Button variant='outline-primary' onClick={() => { navigate('/pages/view/' + e.page_id); props.makeDirty(); }}><i className='bi bi-eye' /></Button>
-        {((session.backOffice && session.user.id === e.author_id) || (session.backOffice && session.user.admin)) ? <Button variant='outline-secondary' className='mx-2' onClick={() => navigate('/pages/edit/' + e.page_id)} ><i className='bi bi-pencil-square' /></Button> : false}
-        {((session.backOffice && session.user.id === e.author_id) || (session.backOffice && session.user.admin)) ? <Button variant='outline-danger' onClick={() => props.deletePage(e.page_id)}><i className='bi bi-trash' /></Button> : false}
-        {loading ? <Loading /> : false}
-      </td>
-    </tr>
-  );
-}
-
-function MainPages(props) {
-  const session = useContext(UserContext);
-  //Pages are sorted in publication date order on the server, before sending them to the client
-  return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <Table bordered hover>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Created on</th>
-                <th>Published on</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.pages.map((e) => <PageRow key={e.page_id} e={e} deletePage={props.deletePage} makeDirty={props.makeDirty} />)}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
-    </Container>
-  )
-}
-
-export { MainPages, PageRow, PageView, PageEdit };
+export { PageView, PageEdit };
