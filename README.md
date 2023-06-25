@@ -228,7 +228,7 @@ URL: `/api/users`
 
 Method: GET
 
-Description: get all users. A cookie with a VALID SESSION ID must be provided. The user requesting the deletion of the answer must be an admin.
+Description: get all users. A cookie with a VALID SESSION ID must be provided. The user requesting the list of users must be an admin.
 
 Request body: _None_
 
@@ -240,7 +240,10 @@ Response body:
   {
     "id": 1,
     "name": "u1"
-  }
+  },
+  {
+    ..
+  },...
 ]
 ```
 ### __Create a new session (login)__
@@ -339,7 +342,7 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 
 - `PageView` (in `PageComponents.jsx`): component that renders a page only in view mode. It renders a list of `BlockView` components, that are responsible for rendering the single block.
 
-- `NavHeader` (in `NavbarComponents.jsx): component that renders the navbar, present in every page of the application, it renders different buttons based on current session or route.
+- `NavHeader` (in `NavbarComponents.jsx`): component that renders the navbar, present in every page of the application, it renders different buttons based on current session or route.
 
 - `LoginForm` (in `AuthComponents.jsx`): component that renders the form for login
 
