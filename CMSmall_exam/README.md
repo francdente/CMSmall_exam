@@ -1,5 +1,11 @@
 # Exam #1: "CMSmall"
 ## Student: Dente Francesco 
+## Commands to test the web application locally
+- git clone ...
+- cd <projectDir>
+- git pull origin main # just in case the default branch is not main
+- (cd client ; npm install)
+- (cd server ; npm install)
 
 ## React Client Application Routes
 
