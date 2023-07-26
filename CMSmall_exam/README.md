@@ -1,12 +1,17 @@
-# Exam #1: "CMSmall"
-## Student: Dente Francesco 
+# "CMSmall" web application
 ## Commands to test the web application locally
-- git clone ...
-- cd "projectDir"
-- git pull origin main # just in case the default branch is not main
-- (cd client ; npm install)
-- (cd server ; npm install)
-
+- `git clone ...`
+- `cd "projectDir"`
+- `git pull origin main` # just in case the default branch is not main
+- (`cd client` ;`npm install`)
+- (`cd server` ; `npm install`)
+- `npm run dev` in client dir
+- `node index.js` in server dir
+## Overview
+- Simple **React** application (Single-Page application), that interacts with an HTTP API implemented using **Node+Express**.
+- Data persistence is obtained using a simple **SQLite** file as database.
+- Authentication (login) is managed using **passport.js** and session cookies. There is no register functionality.
+- The application is not meant to work well when using browser's refresh button or manual setting of URLs
 ## React Client Application Routes
 
 - Route `/`: Main page, contains the list of pages, the form to create a new page and the form to update the sitename (if admin). 
