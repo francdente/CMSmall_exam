@@ -12,7 +12,7 @@ Welcome to the repository of my master's projects completed during my time at Po
 
 2. **FingerprintSpoofingDetection**
    - Description: Machine learning project developed as a part of the Machine Learning and Pattern Recognition exam at Politecnico di Torino during academic year 2022/2023
-   - Link to Project Folder: [FingerPrintSpoofingDetection](./FingerPrintSpoofingDetection/)
+   - Link to Project Folder: [FingerprintSpoofingDetection](./FingerprintSpoofingDetection/)
    - Status: Completed
    - Grade: 10/10
 
