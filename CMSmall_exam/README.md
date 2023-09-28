@@ -362,7 +362,7 @@ Table `images` - images (`image_id`, `image_name`, `image_url`)
 ![Screenshot](./NewPage.PNG)
 
 ## Users Credentials
-
+Since there is no register functionalities, these can be used to try out the application
 - username: u1@e.com, password: "pwd", admin: false
 - username: u2@e.com, password: "pwd", admin: false 
 - username: u3@e.com, password: "pwd", admin: false 
