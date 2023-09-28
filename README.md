@@ -5,7 +5,7 @@ Welcome to the repository of my master's projects completed during my time at Po
 ## Projects
 
 1. **RustShot**
-   - Description: Screenshot grabber application developed in Rust for the Programmazione di Sistema exam at Politecnico di Torino during academic year 2022/2023 together with other 2 students
+   - Description: graphical, cross-platform screenshot grabber application developed in Rust for the Programmazione di Sistema exam at Politecnico di Torino during academic year 2022/2023 together with other 2 students
    - Link to Project Folder: [RustShot](https://github.com/AChiabodo/RustShot)
    - Status: Completed
    - Grade: 6/6
