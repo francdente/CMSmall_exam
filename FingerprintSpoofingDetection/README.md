@@ -1,1 +1,1 @@
-Nothing important for now
+The main goal of the course was to learn the theory behind the machine learning algorithms that we used, not how to write great ML code in python, that's why the source code may not be particularly appealing.
