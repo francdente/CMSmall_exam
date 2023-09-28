@@ -4,13 +4,19 @@ Welcome to the repository of my master's projects completed during my time at Po
 
 ## Projects
 
-1. **CMSmall**
+1. **RustShot**
+   - Description: Screenshot grabber application developed in Rust for the Programmazione di Sistema exam at Politecnico di Torino during academic year 2022/2023 together with other 2 students
+   - Link to Project Folder: [RustShot](https://github.com/AChiabodo/RustShot)
+   - Status: Completed
+   - Grade: 6/6
+
+2. **CMSmall**
    - Description: Web application developed for the WebApplication I exam at Politecnico di Torino during academic year 2022/2023
    - Link to Project Folder: [CMSmall_exam](./CMSmall_exam/)
    - Status: Completed
    - Grade: 30L/30
 
-2. **FingerprintSpoofingDetection**
+3. **FingerprintSpoofingDetection**
    - Description: Machine learning project developed as a part of the Machine Learning and Pattern Recognition exam at Politecnico di Torino during academic year 2022/2023
    - Link to Project Folder: [FingerprintSpoofingDetection](./FingerprintSpoofingDetection/)
    - Status: Completed
